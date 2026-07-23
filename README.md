@@ -1,445 +1,137 @@
 # 📱 Social Pulse: Social Media Performance Insights Dashboard
 
-A professional end-to-end Power BI analytics project designed to analyze social media performance across multiple platforms, regions, content types, and publishing schedules. This dashboard transforms raw social media data into actionable business insights, enabling marketing teams to optimize content strategy, audience engagement, and campaign performance.
+An end-to-end, AI-augmented Power BI analytics project analyzing **5,600+ social media posts** across **8 countries** and **5 platforms** — combining traditional BI tooling with Claude AI automation (via MCP server integration) to accelerate data modeling, DAX development, and dashboard delivery.
+
+🔗 **[Interactive Dashboard](#)** &nbsp;|&nbsp; 📁 **[Download .pbix](Social_Media_Performance.pbix)**
 
 ---
 
-# Executive Summary
+## 🎯 Purpose
 
-Social media teams generate thousands of posts across multiple platforms every month, making it difficult to identify which content performs best, where engagement is strongest, and when audiences are most active.
-
-This project analyzes **5,600 social media posts** across **8 countries** and **5 major social media platforms** using Power BI, PostgreSQL, Power Query, SQL, and DAX.
-
-The dashboard enables users to:
-
-- Monitor overall social media performance
-- Compare engagement across platforms and regions
-- Discover high-performing content formats
-- Identify optimal posting times
-- Track Month-over-Month engagement growth
-- Support data-driven marketing decisions
+The **Social Media Performance Dashboard** helps social media managers, digital marketing analysts, and brand strategists track and compare engagement performance across platforms, regions, and content types. It answers critical business questions — *what content works, where, and when* — through an interactive, KPI-driven Power BI report, while showcasing a modern, AI-assisted analytics workflow.
 
 ---
 
-# Project Objectives
+## 🛠️ Tech Stack
 
-The primary objective of this project is to provide a centralized analytical solution for monitoring social media performance.
-
-The dashboard helps answer business questions such as:
-
-- Which platform generates the highest engagement?
-- Which content type performs best?
-- Which regions have the strongest audience engagement?
-- What is the best time to publish content?
-- Is engagement improving over time?
-- How does Organic content compare with Sponsored content?
-- Which months experienced significant growth or decline?
+- 📊 **Power BI Desktop** – Core visualization and report-building platform
+- 📂 **Power Query Editor** – Data transformation, cleaning, and shaping (ETL layer)
+- 📈 **Microsoft Excel** – Initial data collection and exploratory cleaning
+- 🧠 **DAX (Data Analysis Expressions)** – Calculated measures and KPI logic ([see all measures →](dax_measures.md))
+- 🤖 **Claude AI (via MCP Server Integration)** – Automated the data modeling and DAX development workflow
 
 ---
 
-# Business Problem
+## 🤖 AI-Augmented Workflow (Claude + Power BI via MCP)
 
-Marketing teams often manage campaigns across multiple platforms, regions, and content formats.
+A key differentiator of this project is the use of **Claude AI, connected directly to Power BI Desktop through an MCP (Model Context Protocol) server**, to automate and accelerate parts of the data modeling process that are traditionally manual and repetitive.
 
-Without a centralized reporting solution, it becomes difficult to:
+**What Claude was used for:**
+- **Live Model Connection:** Established a direct, real-time connection between Claude and the live Power BI semantic model — enabling programmatic inspection and modification of tables, columns, and measures.
+- **Automated DAX Measure Creation:** All core DAX measures (Total Engagements, Total Likes, Total Comments, Total Shares, Total Views, Total Impressions, Avg Engagement, Engagement Previous Month, Engagement MoM % Change) were generated and deployed directly into the model via Claude — with formulas reviewed and refined (e.g., choosing `DATEADD` over `PREVIOUSMONTH` for more flexible period-over-period comparisons).
+- **Calendar (Date) Table Governance:** Used Claude to audit the model and discover **9 redundant, hidden auto-generated date tables** created by Power BI's default Auto Date/Time setting. Claude removed all duplicates and helped standardize the model around a single, clean `Dim_Date` calendar table — improving model performance and consistency.
+- **Model Auditing:** Used Claude to inspect table/column metadata directly (including hidden objects not visible in the standard Power BI UI) to validate data structure before building visuals.
 
-- Compare platform performance
-- Measure campaign effectiveness
-- Identify audience behavior
-- Optimize publishing schedules
-- Monitor engagement trends
-- Make strategic marketing decisions
-
-This dashboard addresses these challenges by consolidating all performance metrics into a single interactive reporting solution.
+**Why this matters:** This reflects a forward-looking, efficient analytics workflow — using AI tooling to reduce manual, repetitive modeling work while maintaining full control and review over every change, rather than relying on AI as a black box.
 
 ---
 
-# Dataset Overview
+## 📂 Data Source
 
-### Dataset Size
-
-- Total Posts: **5,600**
-- Countries: **8**
-- Platforms: **5**
-- Content Types: **Organic, Sponsored**
-- Post Formats:
-  - Video
-  - Image
-  - Text
-  - Live Stream
-  - Article
-
-### Platforms
-
-- Facebook
-- Instagram
-- YouTube
-- LinkedIn
-- X (Twitter)
-
-### Regions
-
-- USA
-- Canada
-- Brazil
-- United Kingdom
-- Germany
-- India
-- Japan
-- Australia
-
-### Dataset Granularity
-
-Each row represents **one individual social media post**.
-
-The dataset contains post-level engagement metrics including:
-
-- Likes
-- Comments
-- Shares
-- Views
-- Impressions
-- Engagement Rate
-- Publish Date
-- Publish Time
-- Platform
-- Country
-- Content Type
-- Engagement Level
+Post-level performance data covering **5,600 posts** across **8 regions** (USA, Japan, Brazil, UK, Canada, Australia, India, Germany) and **5 platforms** (Facebook, Instagram, YouTube, LinkedIn, X/Twitter). Fields include post type (Video, Image, Live Stream, Text, Article), content type (Organic/Sponsored), engagement level (High/Medium/Low), publish date/time, and core engagement metrics (Likes, Comments, Shares, Views, Impressions).
 
 ---
 
-# Tech Stack
+## 🧩 Business Problems & How They Were Solved
 
-## Visualization
-
-- Power BI Desktop
-
-## Data Preparation
-
-- Power Query
-- Microsoft Excel
-
-## Database
-
-- PostgreSQL
-
-## Data Modeling
-
-- Star Schema
-- Fact & Dimension Tables
-
-## Analytics
-
-- DAX
-- Time Intelligence
-- KPI Measures
-- Month-over-Month Analysis
-
-## Version Control
-
-- Git
-- GitHub
+| Business Problem | Solution Implemented | Estimated Impact |
+|---|---|---|
+| Marketing teams couldn't quickly identify which content format drives the most engagement | Built a **Total Shares by Post Type** visual, revealing Video content as the dominant driver (202M shares) | Reallocating budget toward video could meaningfully lift overall share volume given its 10x performance edge |
+| No visibility into optimal posting times, leading to inconsistent reach | Built a **Time of Day vs. Engagement heatmap** to pinpoint exact peak engagement windows (10AM–12PM, 4PM–6PM) | Aligning publish schedules to peak windows can improve reach without increasing post volume |
+| Regional performance was scattered across disconnected exports, making cross-market comparison difficult | Consolidated all regional data into a single model with a **Total Engagements by Region** visual and **geo-map** | Enabled side-by-side comparison of 8 countries in one view, replacing manual cross-referencing |
+| No way to track whether engagement was growing or declining over time | Built **Engagement Previous Month** and **Engagement MoM % Change** DAX measures | Gives stakeholders real-time visibility into growth/decline trends instead of month-end manual reporting |
+| Data model was bloated with 9 redundant, auto-generated hidden date tables, risking inconsistent time-based calculations | Audited and cleaned the model, consolidating all date logic into a single governed `Dim_Date` table | Reduced model complexity and improved refresh performance by removing 9 unnecessary tables |
+| Stakeholders needed both a high-level executive view and a detailed operational view | Designed a **two-page report structure**: Executive Summary + Temporal & Geo Performance | Serves both leadership (quick KPIs) and analysts (deep-dive) without building separate reports |
 
 ---
 
-# Data Cleaning & Transformation
+## 🔍 Key Visuals
 
-The dataset was transformed using Power Query before loading into Power BI.
+**Executive Summary Page**
+- KPI Cards: Total Posts (5,600), Total Engagements (646.5M), Avg Engagement Rate (15.28%), Total Views (4,806.28M), Total Likes (844M), Total Shares (267M), Total Comments (193M)
+- Total Shares by Post Type (Donut Chart)
+- Total Engagements by Region (Bar Chart)
+- Engagement Level & Content Type Filters (High/Medium/Low, Organic/Sponsored)
+- Total Engagements & MoM % Change Trend Chart
 
-Cleaning activities included:
-
-- Removed duplicate records
-- Standardized column names
-- Corrected data types
-- Handled missing values
-- Removed unnecessary columns
-- Created Date Dimension
-- Built lookup tables
-- Validated relationships
-- Optimized model structure
+**Temporal & Geo Performance Page**
+- Global Engagement Map (regional pie-chart bubbles by continent)
+- Total Posts by Month and Region (Area Chart)
+- Time of Day vs. Engagement Heatmap Table (by day and hour)
 
 ---
 
-# Data Model
+## 💡 Data Insights (Elaborated)
 
-The dashboard follows a **Star Schema** design to improve performance and simplify reporting.
+- **Video Content Dominance:** Video posts generated **202M shares** — more than 10x the next-highest format (Image, 20M). This strongly suggests video is the single most effective format for driving reach and should be prioritized in future content planning and budget allocation.
 
-Tables include:
+- **Time-of-Day Engagement Patterns:** Engagement is not evenly distributed throughout the day — clear peaks occur between **10 AM–12 PM** and again **4 PM–6 PM**, while early morning (8–9 AM) and early afternoon (1–2 PM) show significantly lower activity. This indicates audience behavior is concentrated around late-morning browsing and post-work/evening leisure time, and posting schedules should be aligned accordingly.
 
-Fact Table
+- **Balanced Global Reach:** Engagement across regions is relatively even — USA leads at 91M, followed closely by Japan and Brazil (83M each), the UK (82M), Canada (80M), Australia (79M), India (77M), and Germany (71M). No single region dominates, indicating the brand/content has genuinely international appeal rather than being reliant on one core market.
 
-- fact_posts
+- **Post-April Volume Decline:** Monthly post volume dropped sharply after April — from a range of ~600–700 posts/month (Jan–Apr) down to a stable ~200–300 posts/month for the remainder of the year. This is a critical trend worth investigating further, as it may reflect a strategic shift, budget reallocation, resourcing changes, or a seasonal campaign wind-down.
 
-Dimension Tables
+- **Engagement Volatility Over Growth Stability:** The MoM % Change trend shows frequent spikes and dips rather than smooth, compounding growth — suggesting engagement is largely event/campaign-driven rather than organically increasing, which has implications for how success should be measured (campaign-level vs. baseline growth).
 
-- Dim_Date
-- Dim_Location
-
-Measure Table
-
-- _Measures
-
-The model enables efficient filtering, aggregation, and DAX calculations.
+- **Underutilized Formats:** Article (11M) and Text (12M) posts contribute the least to overall shares, indicating these formats may be better suited for niche, informational, or SEO-driven purposes rather than reach-focused campaigns.
 
 ---
 
-# DAX Measures
+## 🗂️ Data Modeling
 
-Custom DAX measures were created to support dynamic reporting and KPI calculations.
+The semantic model follows a clean **star schema** design for optimal performance and simplified relationships:
 
-Examples include:
+- `fact_posts` — transactional post-level engagement data
+- `Dim_Date` — governed calendar table (audited and consolidated via Claude AI)
+- `dim_location` — region/country dimension
+- `_Measures` — dedicated table housing all DAX measures
 
-- Total Engagements
-- Average Engagement Rate
-- Total Views
-- Total Likes
-- Total Shares
-- Total Comments
-- Previous Month Engagement
-- Month-over-Month Growth %
-- Dynamic KPI Cards
+**Model Efficiency:** Removed 9 redundant, hidden auto-generated date tables during model audit, reducing unnecessary complexity while preserving full time-intelligence functionality through a single governed `Dim_Date` table.
+
+![Data Model](https://github.com/DilawarShafiq44/Social_media_performance_dashboard/blob/main/Data_modling.PNG)
 
 ---
 
-# Dashboard Features
-
-The dashboard includes:
-
-- Interactive Slicers
-- Cross-filtering
-- Dynamic KPI Cards
-- Drill-down Analysis
-- Time Intelligence
-- Regional Analysis
-- Platform Comparison
-- Responsive Visual Layout
-
----
-
-# Dashboard Walkthrough
-
-## Executive Summary
-
-Provides a high-level overview of overall social media performance using KPI cards.
-
-Key Metrics include:
-
-- Total Posts
-- Total Engagements
-- Engagement Rate
-- Views
-- Likes
-- Shares
-- Comments
-
-Visuals:
-
-- KPI Cards
-- Shares by Post Type
-- Engagement by Region
-- Monthly Engagement Trend
-- Content Type Filter
-- Engagement Level Filter
-
-Business Value:
-
-Allows decision-makers to quickly evaluate overall campaign performance.
-
----
-
-## Temporal & Geo Performance
-
-Analyzes engagement patterns across time and geography.
-
-Visuals include:
-
-- World Map
-- Monthly Post Trend
-- Day & Hour Engagement Heatmap
-
-Business Value:
-
-Helps identify:
-
-- Best posting hours
-- High-performing countries
-- Seasonal engagement patterns
-- Publishing trends
-
----
-
-# Key Business Insights
-
-### Video Dominates Engagement
-
-Video posts generate significantly more shares than all other content formats combined, making video the strongest driver of audience interaction.
-
----
-
-### Optimal Posting Time
-
-Engagement is highest between **10:00 AM–12:00 PM** and **4:00 PM–6:00 PM**, suggesting these windows are ideal for publishing new content.
-
----
-
-### Global Audience Distribution
-
-Engagement is relatively balanced across multiple countries, indicating strong international audience reach rather than dependence on a single market.
-
----
-
-### Publishing Trend
-
-Posting activity declines noticeably after April, highlighting a potential change in campaign strategy, budget allocation, or content planning.
-
----
-
-### Performance Monitoring
-
-Month-over-Month analysis enables teams to quickly identify growth periods and investigate declines in campaign performance.
-
----
-
-# Business Recommendations
-
-Based on dashboard insights:
-
-- Increase investment in video content.
-- Publish during peak engagement hours.
-- Prioritize high-performing regions.
-- Monitor declining posting frequency.
-- Compare Organic and Sponsored campaigns regularly.
-- Track Month-over-Month KPIs for continuous optimization.
-
----
-
-# Skills Demonstrated
-
-This project demonstrates practical experience in:
-
-- Data Cleaning
-- ETL
-- Power Query
-- SQL
-- PostgreSQL
-- Power BI
-- Data Modeling
-- Star Schema
-- DAX
-- Time Intelligence
-- Dashboard Design
-- KPI Development
-- Data Visualization
-- Business Analysis
-- Storytelling with Data
-
----
-
-# Project Workflow
-
-```
-Raw Dataset
-      │
-      ▼
-Microsoft Excel
-      │
-      ▼
-PostgreSQL
-      │
-      ▼
-Power Query
-      │
-      ▼
-Data Cleaning
-      │
-      ▼
-Star Schema Modeling
-      │
-      ▼
-DAX Measures
-      │
-      ▼
-Interactive Dashboard
-      │
-      ▼
-Business Insights
-```
-
----
-
-# Repository Structure
+## 📂 Repository Structure
 
 ```
 Social-Media-Performance-Dashboard/
 │
-├── data/
-│   ├── sample_data.csv
-│   └── data_dictionary.xlsx
-│
-├── sql/
-│   ├── database_schema.sql
-│   └── analysis_queries.sql
-│
-├── power_query/
-│   └── transformation_steps.md
-│
+├── data/                     # Sample/raw data or data dictionary
+├── power_query/              # Power Query (M) transformation steps
+├── dax_measures.md           # All DAX measures with descriptions
 ├── screenshots/
 │   ├── executive_summary.png
-│   └── temporal_geo_performance.png
-│
-├── docs/
+│   ├── temporal_geo_performance.png
 │   └── data_model.png
-│
-├── dax_measures.md
 ├── Social_Media_Performance.pbix
-├── README.md
-├── LICENSE
-└── .gitignore
+└── README.md
 ```
 
 ---
 
-# Dashboard Preview
-
-## Executive Summary
+## 📸 Dashboard Preview
 
 ![Executive Summary](https://github.com/DilawarShafiq44/Social_media_performance_dashboard/blob/main/Social_media_dashboard_1.png)
-
----
-
-## Temporal & Geo Performance
-
 ![Temporal & Geo Performance](https://github.com/DilawarShafiq44/Social_media_performance_dashboard/blob/main/Social_media_dashboard_2.png)
 
 ---
 
-# Future Enhancements
+## 👤 Author
 
-Potential improvements include:
-
-- Row-Level Security (RLS)
-- Mobile Layout Optimization
-- AI-powered Key Influencers Visual
-- Forecasting with Time Series Analysis
-- Automated Data Refresh
-- Incremental Refresh
-- Real-time Dashboard Integration
+**Dilawer Shafiq**
+Data Analyst | Power BI • Excel • AI-Augmented Analytics
+📧 [mughal.dlawer@gmail.com](mailto:mughal.dlawer@gmail.com) | 🔗 [LinkedIn](https://www.linkedin.com/in/dilawarshafiq44/)
 
 ---
-
-# Author
-
-**Dilawar Shafiq**
-
-**Data Analyst | Power BI | SQL | Excel | PostgreSQL**
-
-📧 Email: mughal.dlawer@gmail.com
-
-🔗 LinkedIn: https://www.linkedin.com/in/dilawarshafiq44/
-
-💼 Portfolio: *Coming Soon*
-
----
-
-⭐ If you found this project useful, consider giving the repository a star.
+⭐ *If you found this project helpful, consider giving the repository a star!*
