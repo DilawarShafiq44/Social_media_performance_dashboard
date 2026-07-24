@@ -2,7 +2,9 @@
 
 An end-to-end, AI-augmented Power BI analytics project analyzing **5,600+ social media posts** across **8 countries** and **5 platforms** — combining traditional BI tooling with Claude AI automation (via MCP server integration) to accelerate data modeling, DAX development, and dashboard delivery.
 
-🔗 **[Interactive Dashboard](#)** &nbsp;|&nbsp; 📁 **[Download .pbix](Social_Media_Performance.pbix)**
+🔗 **[Interactive Dashboard](#)** &nbsp;|&nbsp; 📁 **[Download .pbix](Social_Media_Performance.pbix)** 
+🔗 **[View this project on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7486255505657552897/)**
+```
 
 ---
 
@@ -17,7 +19,7 @@ The **Social Media Performance Dashboard** helps social media managers, digital 
 - 📊 **Power BI Desktop** – Core visualization and report-building platform
 - 📂 **Power Query Editor** – Data transformation, cleaning, and shaping (ETL layer)
 - 📈 **Microsoft Excel** – Initial data collection and exploratory cleaning
-- 🧠 **DAX (Data Analysis Expressions)** – Calculated measures and KPI logic ([see all measures →](dax_measures.md))
+- 🧠 **DAX (Data Analysis Expressions)** – Calculated measures and KPI logic ([see all measures →](https://github.com/DilawarShafiq44/Social_media_performance_dashboard/blob/main/dax_measures.md))
 - 🤖 **Claude AI (via MCP Server Integration)** – Automated the data modeling and DAX development workflow
 
 ---
