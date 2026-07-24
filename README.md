@@ -4,7 +4,6 @@ An end-to-end, AI-augmented Power BI analytics project analyzing **5,600+ social
 
 🔗 **[Interactive Dashboard](#)** &nbsp;|&nbsp; 📁 **[Download .pbix](Social_Media_Performance.pbix)** 
 🔗 **[View this project on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7486255505657552897/)**
-```
 
 ---
 
